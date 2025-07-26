@@ -11,11 +11,13 @@ CORS(app)
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_API_URL = os.getenv("OPENROUTER_API_URL")
+OPENROUTER_API_MODEL = os.getenv("OPENROUTER_API_MODEL")
 
 @app.route("/api/smart-summarizer", methods=["POST"])
 def smart_summarizer():
     try:
         data = request.get_json()
+        data["model"] = OPENROUTER_API_MODEL
         headers = {
             "Authorization": f"Bearer {OPENROUTER_API_KEY}",
             "Content-Type": "application/json",
